@@ -9,6 +9,7 @@ const piApiClient = axios.create({
   baseURL: PI_API_URL,
   headers: {
     'Content-Type': 'application/json',
+    'X-API-Key': process.env.PI_API_KEY // Add the API key from environment variables
   },
 });
 
@@ -37,7 +38,8 @@ export const getPiNetworkWalletBalance = async (accessToken) => {
   try {
     const response = await piApiClient.get('/v2/wallet/balance', {
       headers: {
-        Authorization: `Bearer ${accessToken}`
+        Authorization: `Bearer ${accessToken}`,
+        // The X-API-Key is already set in the piApiClient
       }
     });
     
